@@ -1,0 +1,62 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             xmlns:vm="clr-namespace:Attestator.ViewModels"
+              xmlns:views="clr-namespace:Attestator.Views"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Attestator.Views.MainView"
+             x:DataType="vm:MainViewModel">
+  <Grid>
+
+    <Grid.RowDefinitions>
+      <RowDefinition Height="Auto"/>
+      <RowDefinition />
+      <RowDefinition Height="Auto"/>
+    </Grid.RowDefinitions>
+
+    <DockPanel Grid.Row="0">
+      <Menu>
+        <MenuItem Header="_Файл">
+          <MenuItem Header="_Сохранить" Command="{Binding SaveFileCommand}"/>
+          <MenuItem Header="Открыть проект..." Command="{Binding OpenProjectCommand}"/>
+          <MenuItem Header="Создать проект..." Command="{Binding CreateProjectCommand}"/>
+          <Separator/>
+          <MenuItem Header="Открыть шаблон..." Command="{Binding OpenMethodologyTemplateCommand}"/>
+          <MenuItem Header="Создать шаблон..." Command="{Binding CreateMethodologyTemplateCommand}"/>
+        </MenuItem>
+        <MenuItem Header="Помощь" Command="{Binding OpenHelpCommand}"/>
+      </Menu>
+
+      <TextBlock Text="{Binding CurrentFile.Name}" TextTrimming="CharacterEllipsis" />
+    </DockPanel>
+
+    <ContentControl Grid.Row="1" Content="{Binding CurrentFile}">
+      <ContentControl.ContentTemplate>
+        <vm:FileViewSelector>
+
+          <vm:FileViewSelector.EmptyFileDataTemplate>
+            <DataTemplate DataType="vm:EmptyFileViewModel">
+              <views:EmptyFileView/>
+            </DataTemplate>
+          </vm:FileViewSelector.EmptyFileDataTemplate>
+
+          <vm:FileViewSelector.ProjectDataTemplate>
+            <DataTemplate DataType="vm:ProjectViewModel">
+              <views:ProjectView/>
+            </DataTemplate>
+          </vm:FileViewSelector.ProjectDataTemplate>
+
+          <vm:FileViewSelector.MethodologyTemplateDataTemplate>
+            <DataTemplate DataType="vm:MethodologyTemplateViewModel">
+              <views:MethodologyTemplateView/>
+            </DataTemplate>
+          </vm:FileViewSelector.MethodologyTemplateDataTemplate>
+        </vm:FileViewSelector>
+      </ContentControl.ContentTemplate>
+
+    </ContentControl>
+
+  </Grid>
+
+</UserControl>

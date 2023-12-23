@@ -1,0 +1,29 @@
+<UserControl xmlns="https://github.com/avaloniaui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+             mc:Ignorable="d" d:DesignWidth="800" d:DesignHeight="450"
+             x:Class="Attestator.Views.EmptyFileView">
+  <DockPanel Grid.Row="1" IsVisible="{Binding !ProjectOpened}">
+      <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+        <TextBlock Text="Аттестатор"/>
+        <StackPanel Orientation="Horizontal" Spacing="10">
+          <StackPanel>
+            <TextBlock Text="Недавние проекты"/>
+          </StackPanel>
+          <StackPanel Spacing="5">
+            <StackPanel.Styles>
+              <Style Selector="Button">
+                <Setter Property="HorizontalAlignment" Value="Stretch"/>
+              </Style>
+            </StackPanel.Styles>
+            <TextBlock Text="Начало работы"/>
+              <Button Content="Открыть проект" Command="{Binding OpenProjectCommand}"/>
+              <Button Content="Создать проект" Command="{Binding CreateProjectCommand}"/>
+              <Button Content="Открыть шаблон" Command="{Binding OpenMethodologyTemplateCommand}"/>
+              <Button Content="Создать шаблон" Command="{Binding CreateMethodologyTemplateCommand}"/>
+          </StackPanel>
+        </StackPanel>
+      </StackPanel>
+    </DockPanel>
+</UserControl>
