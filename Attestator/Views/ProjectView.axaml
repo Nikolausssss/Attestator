@@ -43,7 +43,11 @@
               </StackPanel>
 
               <DockPanel IsVisible="{Binding !!Experiments.Count}">
-                <Button DockPanel.Dock="Top" Content="Добавить испытание" Command="{Binding AddExperimentCommand}"/>
+                <StackPanel Orientation="Horizontal" Spacing="5" DockPanel.Dock="Top">
+                  <Button Content="Добавить испытание" Command="{Binding AddExperimentCommand}"/>
+                  <Button Content="Создать отчет" HorizontalAlignment="Center" Command="{Binding AddExperimentCommand}"/>
+                </StackPanel>
+
                 <TabControl ItemsSource="{Binding Experiments}">
                   <TabControl.ItemTemplate>
                     <DataTemplate>
@@ -58,12 +62,16 @@
                         <ColumnDefinition/>
                         <ColumnDefinition Width="5"/>
                         <ColumnDefinition/>
-                        <ColumnDefinition Width="5"/>
-                        <ColumnDefinition/>
                         </Grid.ColumnDefinitions>
 
+                        <Grid.RowDefinitions>
+                        <RowDefinition/>
+                        <RowDefinition Height="5"/>
+                        <RowDefinition/>
+                        </Grid.RowDefinitions>
+
                         <GridSplitter Grid.Column="1"/>
-                        <GridSplitter Grid.Column="3"/>
+                        <GridSplitter Grid.Row="1"/>
 
                         <DockPanel>
                           <DockPanel DockPanel.Dock="Top">
@@ -102,7 +110,7 @@
                           </ListBox>
                         </DockPanel>
 
-                        <DockPanel Grid.Column="2">
+                        <DockPanel Grid.Column="0" Grid.Row="2">
                           <DockPanel DockPanel.Dock="Top">
                             <TextBlock Text="Параметры" VerticalAlignment="Center"/>
                           </DockPanel>
@@ -124,18 +132,7 @@
                                     <DockPanel>
                                       <TextBlock Text="{Binding Title}"/>
                                       <ComboBox SelectedItem="{Binding Value}" ItemsSource="{Binding ChoiseItems}" >
-                                        <ComboBox.ItemTemplate>
-                                          <vm:TypedDataTemplateSelector>
-                                            <vm:TypedDataTemplateSelector.DefaultTemplate>
-                                              <DataTemplate>
-                                                <DockPanel>
-                                                  <TextBlock Text="{Binding Title}"/>
-                                                  <TextBox Text="{Binding Value}" />
-                                                </DockPanel>
-                                              </DataTemplate>
-                                            </vm:TypedDataTemplateSelector.DefaultTemplate>
-                                          </vm:TypedDataTemplateSelector>
-                                        </ComboBox.ItemTemplate>
+                                        
                                       </ComboBox>
                                     </DockPanel>
                                   </DataTemplate>
@@ -153,7 +150,7 @@
                         </DockPanel>
 
 
-                        <DockPanel Grid.Column="4">
+                        <DockPanel Grid.Column="2" Grid.RowSpan="3">
                           <DockPanel DockPanel.Dock="Top">
                             <TextBlock Text="Расчеты" VerticalAlignment="Center"/>
                           </DockPanel>

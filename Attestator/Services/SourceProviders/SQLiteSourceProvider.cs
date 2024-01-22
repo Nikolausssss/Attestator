@@ -229,6 +229,15 @@ public class SQLiteSourceProvider : ISourceProvider
         var conn = GetConnection();
         conn.Close();
         conn.Dispose();
+        foreach(var adapter in _adapterTableCashe.Values)
+        {
+            adapter.Dispose();
+        }
+        foreach(var adapter in _adapterViewCashe.Values)
+        {
+            adapter.Dispose();
+        }
+
         SQLiteConnection.ClearPool(conn);
         SQLiteConnection.ClearAllPools();
     }
